@@ -75,6 +75,9 @@ uiModules
   $scope.title = 'Reactor';
   $scope.description = 'lets just use react';
 
+  $scope.fname = 'Mr';
+  $scope.lname = 'Lname';
+
   var currentTime = moment($route.current.locals.currentTime);
   $scope.currentTime = currentTime.format('HH:mm:ss');
   var unsubscribe = $interval(function () {
