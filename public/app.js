@@ -84,4 +84,11 @@ uiModules
     $scope.currentTime = currentTime.add(1, 'second').format('HH:mm:ss');
   }, 1000);
   $scope.$watch('$destroy', unsubscribe);
+})
+.directive('reactor', function () {
+  return {
+    link: function (scope, element) {
+      ReactDOM.render(<HelloComponent fname={scope.fname} lname={scope.lname} />, document.getElementById('reactor-container'));
+    }
+  };
 });
