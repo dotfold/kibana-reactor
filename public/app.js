@@ -7,9 +7,13 @@ import 'ui/autoload/styles';
 import './less/main.less';
 import template from './templates/index.html';
 
-chrome
-  .setNavBackground('#222222')
-  .setTabs([]);
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+// TODO: file issue & PR against generator repo
+console.log('[react]', React);
+// chrome
+//   .setNavBackground('#222222');
 
 uiRoutes.enable();
 uiRoutes
