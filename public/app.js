@@ -28,6 +28,47 @@ uiRoutes
   }
 });
 
+// connect to $scope via hoc
+const HelloComponent = React.createClass({
+  propTypes: {
+    fname : React.PropTypes.string.isRequired,
+    lname : React.PropTypes.string.isRequired
+  },
+  render: function () {
+    return <span>Hello {this.props.fname} {this.props.lname}</span>;
+  }
+});
+
+const wire = function wire(module) {
+  const controller = module.controller('computedController', function ($scope) {
+    console.log('computedController');
+  });
+
+  return function wrapWithWiredScope(Wrapped) {
+    console.log('wrapWithWiredScope');
+    return controller.directive('hello', function () {
+      console.log('computedDirective');
+      return {
+        link: function (scope, element) {
+          console.log('linking computedDirective', element);
+          // {dispatch: () => {console.log('dispatch()');}
+          ReactDOM.render(<div>linked</div>, element[0]);
+        }
+      };
+    });
+  };
+};
+
+wire(uiModules.get('app/reactor', []))(HelloComponent);
+
+
+
+
+
+//
+//  first pass
+//
+
 uiModules
 .get('app/reactor', [])
 .controller('reactorHelloWorld', function ($scope, $route, $interval) {
